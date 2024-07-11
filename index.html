@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    //1.
+
+
+        class Library {
+  #books;
+
+  constructor(initialBooks) {
+    if (new Set(initialBooks).size !== initialBooks.length) {
+      throw new Error("Массив начальных книг содержит дубликаты.");
+    }
+    this.#books = initialBooks;
+  }
+
+  get allBooks() {
+    return this.#books;
+  }
+
+  addBook(title) {
+    if (this.#books.includes(title)) {
+      throw new Error("Книга уже существует в библиотеке.");
+    }
+    this.#books.push(title);
+  }
+
+  removeBook(title) {
+    if (!this.#books.includes(title)) {
+      throw new Error("Книги с таким названием нет в библиотеке.");
+    }
+    this.#books = this.#books.filter(book => book !== title);
+  }
+
+  hasBook(title) {
+    return this.#books.includes(title);
+  }
+}
+
+//2.
+
+function addReview() {
+  const reviewInput = document.getElementById("reviewInput");
+  const reviewsContainer = document.getElementById("reviewsContainer");
+  const reviewText = reviewInput.value.trim();
+  
+  if (reviewText.length < 50 || reviewText.length > 500) {
+    alert("Длина отзыва должна быть от 50 до 500 символов.");
+    return;
+  }
+  
+  const reviewElement = document.createElement("div");
+  reviewElement.textContent = reviewText;
+  reviewsContainer.appendChild(reviewElement);
+  reviewInput.value = "";
+}
+    </script>
+</body>
+</html>
